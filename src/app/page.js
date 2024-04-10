@@ -16,7 +16,7 @@ export default function Home() {
 
 		console.log(logged)
 		console.log(user)
-		console.log(getUserData())
+	getUserData();
 	
 	},[logged,user])
 	const role = getUserData();
@@ -31,7 +31,7 @@ export default function Home() {
 
 	useEffect(()=>{
 		recibirDatos();
-	},[url])
+	},[recibirDatos])
 
 	const updateTableState = async (userId) => {
 
@@ -58,8 +58,9 @@ export default function Home() {
 					<div className="w-full min-h-full flex justify-center items-center ">
 						<div className=" gap-4   grid   grid-cols-2 sm:grid-cols-4 lg:gap-6 xl:gap-8">
 						{
-							table.map((tables)=>{
-							return <Table  tables={tables} updateTableState={updateTableState} />
+							table.map((tables,index)=>{
+
+							return<div key={index}><Table  tables={tables} updateTableState={updateTableState} /></div> 
 							})
                   		}
 						</div>

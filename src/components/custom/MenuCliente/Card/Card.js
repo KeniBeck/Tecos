@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import useCart from "@/hook/useCart";
+import Image from 'next/image'
 
 const Card = ({ product , onAddToCart}) => {
     const { addToCart,getCart } = useCart();
@@ -20,7 +21,7 @@ const Card = ({ product , onAddToCart}) => {
 
     return (
         <div className="relative h-[425px] bg-neutral-800 rounded-md shadow-md text-neutral-100 p-4 w-60">
-            <img src={product.imagen} alt={product.nombre} className="w-full h-48 object-cover mb-4" />
+            <Image src={product.imagen} alt={product.nombre} className="w-full h-48 object-cover mb-4" />
             <h2>{product.nombre}</h2>
             <p className="text-gray-100 mb-4">{product.descripcion}</p>
             <div className="flex justify-between items-center">

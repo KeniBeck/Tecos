@@ -17,7 +17,7 @@ const Employes = () =>{
 
     useEffect(()=>{
         recibirDatos();
-    },[url])
+    },[recibirDatos])
 
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     
@@ -41,8 +41,9 @@ const Employes = () =>{
                             <CamposTable />
                         </div>
                         <div className="flex flex-col">
-                            {user.map((users) => (
-                                <TableEmployes users={users} />
+                            {user.map((users,index) => (
+                                <div key={index}><TableEmployes users={users} /></div>
+                                
                             ))}
                         </div>
                     </div>

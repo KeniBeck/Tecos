@@ -4,6 +4,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { useForm } from "react-hook-form"
 import useSession from "@/hook/useSession";
 import Swal from "sweetalert2";
+import Image from 'next/image'
 
 const LoginForm = () =>{
     const {login} = useSession()
@@ -69,7 +70,7 @@ const LoginForm = () =>{
     className="w-full max-w-[350px] h-auto bg-neutral-800 rounded-xl flex flex-col justify-center items-center gap-2 ">
 
         <div className=" py-7">
-            <img className="h-28 w-auto " src="/tecos-logo-circular.svg" alt="your company"></img>
+            <Image className="h-28 w-auto " src="/tecos-logo-circular.svg" alt="your company"/>
         </div>
         <div className="flex flex-col gap-5">
             
