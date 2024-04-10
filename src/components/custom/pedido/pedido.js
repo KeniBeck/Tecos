@@ -15,7 +15,7 @@ const Pedidos = () =>{
 
     useEffect(()=>{
         recibirDatos();
-    },[url])
+    },[recibirDatos])
 
     const updateCampoOrder = async (orderId) => {
 
