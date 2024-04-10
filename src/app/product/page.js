@@ -6,17 +6,21 @@ import useStore from "@/hook/useSession.js";
 import { useRouter } from "next/navigation";
 
 const Product = () => {
-
+  if (typeof sessionStorage !== 'undefined') {
+    // Código que utiliza sessionStorage aquí
   const {getUserData} = useStore();
   const role = getUserData();
   const router = useRouter()
 
-  
   if (role === 'cajero'){
 
     router.push('/cashier')
-
   }
+} else {
+    // Código de respaldo para manejar el caso en que sessionStorage no esté disponible
+    console.log('sessionStorage no está disponible');
+}
+
     return (
       <RouteProtected>
       <>
