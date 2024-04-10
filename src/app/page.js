@@ -16,7 +16,7 @@ export default function Home() {
 
 		console.log(logged)
 		console.log(user)
-	getUserData();
+	
 	
 	},[logged,user])
 	const role = getUserData();

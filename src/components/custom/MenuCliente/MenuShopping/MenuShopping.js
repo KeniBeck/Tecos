@@ -25,7 +25,7 @@ const MenuShopping = ({ onItemRemoved }) => {
 
     useEffect(() => {
         calculateSubtotal();
-    }, [calculateSubtotal]);
+    }, [url]);
 
   
     const handleCheckout = () => {

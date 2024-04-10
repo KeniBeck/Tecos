@@ -40,8 +40,10 @@ return (
                 <CamposTable />
             </div>
             <div className="flex flex-col">
-                {product.map((products) => (
+                {product.map((products,index) => (
+                    <div key={index}>
                     <TableProducts products={products} />
+                    </div>
                 ))}
             </div>
         </div>

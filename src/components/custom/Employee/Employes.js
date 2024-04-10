@@ -17,7 +17,7 @@ const Employes = () =>{
 
     useEffect(()=>{
         recibirDatos();
-    },[recibirDatos])
+    },[url])
 
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     
