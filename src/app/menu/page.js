@@ -29,7 +29,7 @@ const PgMenu = () => {
 
   useEffect(()=>{
     recibirDatos();
-  },[url])
+  },[recibirDatos])
 
   const role = getUserData();
 

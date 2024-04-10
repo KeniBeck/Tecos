@@ -8,7 +8,7 @@ import  { useRouter } from 'next/navigation';
 const Table = ({ tables, updateTableState }) => {
     const [clicked, setClicked] = useState(false);
     const [ocupada, setOcupada] = useState(false);
-    const {addToCart,getCart} = useCart();
+    const {addToCart} = useCart();
     const router = useRouter()
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const Table = ({ tables, updateTableState }) => {
 		console.log(logged)
 		console.log(user)
 		console.log(getUserData())
-        console.log(getCart())
+        
 	
 	},[logged,user])
 	const role = getUserData();
