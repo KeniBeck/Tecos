@@ -1,22 +1,19 @@
-'use client'
 const useSession = () => {
-    const isBrowser = typeof window !== 'undefined';
-
     const login = (userData) => {
-        if (isBrowser) {
+        if (process.browser) {
             sessionStorage.setItem('logged', true);
             sessionStorage.setItem('userData', JSON.stringify(userData));
         }
     };
 
     const logout = () => {
-        if (isBrowser) {
+        if (process.browser) {
             sessionStorage.clear();
         }
     };
 
     const getUserData = () => {
-        if (isBrowser) {
+        if (process.browser) {
             const userData = sessionStorage.getItem('userData');
             return userData ? JSON.parse(userData) : null;
         }
