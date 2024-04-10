@@ -2,13 +2,12 @@
 import RouteProtected from "@/middleware/RouteProtected";
 import NavBarAdmin from "@/components/custom/navbar/navbarAdmin/NavBarAdmin";
 import Products from "@/components/custom/product/Products";
-import useStore from "@/hook/useSession.js";
+import useSession from "@/hook/useSession.js";
 import { useRouter } from "next/navigation";
 
 const Product = () => {
-  if (typeof sessionStorage !== 'undefined') {
-    // Código que utiliza sessionStorage aquí
-  const {getUserData} = useStore();
+
+  const {getUserData} = useSession();
   const role = getUserData();
   const router = useRouter()
 
@@ -16,11 +15,6 @@ const Product = () => {
 
     router.push('/cashier')
   }
-} else {
-    // Código de respaldo para manejar el caso en que sessionStorage no esté disponible
-    console.log('sessionStorage no está disponible');
-}
-
     return (
       <RouteProtected>
       <>

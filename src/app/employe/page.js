@@ -2,15 +2,13 @@
 import RouteProtected from "@/middleware/RouteProtected";
 import NavBarAdmin from "@/components/custom/navbar/navbarAdmin/NavBarAdmin";
 import Employes from "@/components/custom/Employee/Employes";
-import useStore from "@/hook/useSession.js";
+import useSession from "@/hook/useSession.js";
 import { useRouter } from "next/navigation";
 
 
 const Employe = () => {
-  if (typeof sessionStorage !== 'undefined') {
-    // Código que utiliza sessionStorage aquí
-    
-  const {getUserData} = useStore();
+  
+  const {getUserData} = useSession();
   const role = getUserData();
   const router = useRouter()
 
@@ -20,11 +18,6 @@ const Employe = () => {
     router.push('/cashier')
 
   }
-
-} else {
-    // Código de respaldo para manejar el caso en que sessionStorage no esté disponible
-    console.log('sessionStorage no está disponible');
-}
 
     return (
       <RouteProtected>
