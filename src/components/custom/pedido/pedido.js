@@ -38,8 +38,10 @@ const Pedidos = () =>{
                
                <div>
                     <div className="flex flex-col">
-                        {order.map((orders) => (
-                            <CampoOrder orders={orders} updateCampoOrder={updateCampoOrder} />
+                        {order.map((orders,index) => (
+                            <div key={index}><CampoOrder orders={orders} updateCampoOrder={updateCampoOrder} /></div>
+                            
+                           
                          ))}
                     </div>
                 </div>
