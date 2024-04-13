@@ -32,7 +32,7 @@ const MenuAdmin = () =>{
                     <MdAdminPanelSettings className="text-3xl "/>
                     </div>
                     <div className="px-5">
-                        <a href="#">Administrador</a>
+                        <a href="/admin">Administrador</a>
                     </div>
                 </div>
                 
@@ -41,7 +41,7 @@ const MenuAdmin = () =>{
                     <FaCashRegister className="text-3xl "/>
                     </div>
                     <div className="px-5">
-                        <a href="#">Caja</a>
+                        <a href="/cashier">Caja</a>
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@ const MenuAdmin = () =>{
                     <FaCartShopping className="text-3xl" />
                     </div>
                     <div className="px-5"> 
-                    <a href="#">Producto</a>
+                    <a href="/product">Producto</a>
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@ const MenuAdmin = () =>{
                         <MdOutlineRestaurantMenu className="text-3xl"/>
                     </div>
                     <div className="px-5"> 
-                    <a href="#">Menú</a> 
+                    <a href="/menu">Menú</a> 
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@ const MenuAdmin = () =>{
                         <MdTableRestaurant className="text-3xl"/>
                     </div>
                     <div className="px-5">
-                    <Link href="#">Mesas</Link>
+                    <Link href="/">Mesas</Link>
                     </div>
                 </div>
 
@@ -77,7 +77,7 @@ const MenuAdmin = () =>{
                         <FaUser className="text-3xl"/>
                     </div>
                     <div className="px-5">
-                        <a href="#">Empleado</a> 
+                        <a href="/employe">Empleado</a> 
                     </div>
                 </div>
 

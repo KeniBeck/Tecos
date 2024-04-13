@@ -41,9 +41,7 @@ return (
             </div>
             <div className="flex flex-col">
                 {product.map((products,index) => (
-                    <div key={index}>
-                    <TableProducts products={products} />
-                    </div>
+                    <TableProducts key={index} products={products} />
                 ))}
             </div>
         </div>

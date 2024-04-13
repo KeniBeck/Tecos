@@ -2,13 +2,12 @@
 import RouteProtected from "@/middleware/RouteProtected";
 import NavBarAdmin from "@/components/custom/navbar/navbarAdmin/NavBarAdmin";
 import Employes from "@/components/custom/Employee/Employes";
-import useSession from "@/hook/useSession.js";
+import useStore from "@/hook/useSession.js";
 import { useRouter } from "next/navigation";
 
 
 const Employe = () => {
-  
-  const {getUserData} = useSession();
+  const {getUserData} = useStore();
   const role = getUserData();
   const router = useRouter()
 

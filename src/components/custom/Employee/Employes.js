@@ -42,8 +42,7 @@ const Employes = () =>{
                         </div>
                         <div className="flex flex-col">
                             {user.map((users,index) => (
-                                <div key={index}><TableEmployes users={users} /></div>
-                                
+                                <TableEmployes key={index} users={users} />
                             ))}
                         </div>
                     </div>

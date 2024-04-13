@@ -2,18 +2,20 @@
 import RouteProtected from "@/middleware/RouteProtected";
 import NavBarAdmin from "@/components/custom/navbar/navbarAdmin/NavBarAdmin";
 import Products from "@/components/custom/product/Products";
-import useSession from "@/hook/useSession.js";
+import useStore from "@/hook/useSession.js";
 import { useRouter } from "next/navigation";
 
 const Product = () => {
 
-  const {getUserData} = useSession();
+  const {getUserData} = useStore();
   const role = getUserData();
   const router = useRouter()
 
+  
   if (role === 'cajero'){
 
     router.push('/cashier')
+
   }
     return (
       <RouteProtected>

@@ -31,7 +31,7 @@ const MenuBox = () =>{
                     <FaCashRegister className="text-3xl "/>
                     </div>
                     <div className="px-5">
-                        <a href="#">Caja</a>
+                        <a href="/cashier">Caja</a>
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@ const MenuBox = () =>{
                         <MdOutlineRestaurantMenu className="text-3xl"/>
                     </div>
                     <div className="px-5"> 
-                    <a href="#">Menú</a> 
+                    <a href="/menu">Menú</a> 
                     </div>
                 </div>
 

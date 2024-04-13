@@ -8,8 +8,9 @@ import  { useRouter } from 'next/navigation';
 const Table = ({ tables, updateTableState }) => {
     const [clicked, setClicked] = useState(false);
     const [ocupada, setOcupada] = useState(false);
-    const {addToCart} = useCart();
+    const {addToCart,getCart} = useCart();
     const router = useRouter()
+
 
     useEffect(() => {
         setOcupada(tables.estado === 'ocupada');
@@ -23,7 +24,7 @@ const Table = ({ tables, updateTableState }) => {
 		console.log(logged)
 		console.log(user)
 		console.log(getUserData())
-        
+        console.log(getCart())
 	
 	},[logged,user])
 	const role = getUserData();
@@ -34,7 +35,10 @@ const Table = ({ tables, updateTableState }) => {
             await updateTableState(tables.id);
             addToCart({id_mesa: tables.id } )
             setClicked(true);
-             router.push(`/menu`);
+           
+                router.push(`/menu`);
+            
+            
         }
     };
 
