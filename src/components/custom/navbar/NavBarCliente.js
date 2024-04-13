@@ -1,6 +1,6 @@
 'use client'
 import { Macondo_Swash_Caps } from "next/font/google"
-import Image from 'next/image'
+
 
 const Macon = Macondo_Swash_Caps({
 	subsets: ['latin'],
@@ -12,7 +12,7 @@ const NavBarCliente = () =>{
     return (
 				<div className="w-full h-[60px] bg-[rgba(10,10,10,.8)] text-amber-500  flex items-center justify-center">
 					<div className="w-16 ">
-						<Image className=" h-14 w-auto ml-4 sm:ml-20" src="/tecos-logo-circular.svg" alt="your company" />
+						<img className=" h-14 w-auto ml-4 sm:ml-20" src="/tecos-logo-circular.svg" alt="your company" />
 					</div>
 
 					<div className={`flex-1 text-lg sm:text-4xl text-center font-medium ${Macon.className}`}>

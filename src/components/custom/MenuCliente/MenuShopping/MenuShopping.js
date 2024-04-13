@@ -1,10 +1,10 @@
-'use client'
 import React, { useState, useEffect } from 'react';
 import useCart from '@/hook/useCart';
 import Swal from 'sweetalert2';
 
+
 const MenuShopping = ({ onItemRemoved }) => {
-    const { getCart, removeFromCart } = useCart();
+    const { getCart, removeFromCart,clearCart,addToCart } = useCart();
     const [subtotal, setSubtotal] = useState(0);
     const mesa = getCart();
     mesa.filter(item => !item.hasOwnProperty('id_mesa'),);
@@ -25,7 +25,7 @@ const MenuShopping = ({ onItemRemoved }) => {
 
     useEffect(() => {
         calculateSubtotal();
-    }, [calculateSubtotal]);
+    }, []);
 
   
     const handleCheckout = () => {
@@ -114,13 +114,26 @@ const MenuShopping = ({ onItemRemoved }) => {
   const processData = (data) => {
       if (data) {
         exito();
+        handleDeleteCart();
+       
       } else {
           error();
       }
   }
-
+  const handleDeleteCart = () => {
+    const cart = getCart();
+    const cartWithoutMesa = cart.filter(item => item.hasOwnProperty('id_mesa'));
+    clearCart(); // Borra todos los productos del carrito
+    
+    // Vuelve a agregar la mesa al carrito
+    cartWithoutMesa.forEach(item => addToCart(item));
+    
+    // Actualiza el subtotal
+    onItemRemoved();
+    calculateSubtotal();
+  }
     return (
-        <div>
+        <div className="max-h-[540px] overflow-y-auto">
             <h2 className='text-slate-400'>Resumen de compra</h2>
             <div className='gap-5'>
                 <ul className='pt-6'>
@@ -130,11 +143,12 @@ const MenuShopping = ({ onItemRemoved }) => {
                                 <>{<>Mesa: {item.id_mesa}<br/></>}</>
                             ) : (
                                 <>
-                                    
-                                    {item.nombre} - Cantidad: {item.cantidad}
-                                    <div className='flex flex-row'>
-                                        Precio: ${item.precio.toLocaleString()}
-                                        <button onClick={() => handleRemoveFromCart(index)} className='text-red-500 ml-2'>Eliminar</button>
+                                    <div className="rounded-md border border-gray-300 p-3 mb-3">
+                                        {item.nombre} - Cantidad: {item.cantidad}
+                                        <div className='flex flex-row'>
+                                            Precio: ${item.precio.toLocaleString()}
+                                            <button onClick={() => handleRemoveFromCart(index)} className='text-red-500 ml-2'>Eliminar</button>
+                                        </div>
                                     </div>
                                 </>
                             )}
@@ -151,13 +165,12 @@ const MenuShopping = ({ onItemRemoved }) => {
                     type="number"
                     placeholder="Ingrese la cantidad a pagar"
                 />
-                <button onClick={handleCheckout} className='bg-green-500 rounded-lg'>Realizar pago</button>
-              
+                <button onClick={handleCheckout} className='bg-green-600 rounded-lg h-8 text-white hover:bg-green-700'>Realizar pago</button>
+                <button onClick={handleDeleteCart} className='bg-red-600 rounded-lg h-8 text-white hover:bg-red-700'>Cancelar Pedido</button>
             </div>
         </div>
     );
 };
  
-
 
 export default MenuShopping;

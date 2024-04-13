@@ -7,16 +7,16 @@ import NavBarAdmin from "@/components/custom/navbar/navbarAdmin/NavBarAdmin";
 import NavbarCashier from "@/components/custom/navbar/nabvarCashier/NavBarCashier";
 
 
+
 export default function Home() {
 
 	const {logged, user, login, logout,getUserData} = useStore()
-	const [val , setVal] = useState(null)
-	
+
 	useEffect(()=>{
 
 		console.log(logged)
 		console.log(user)
-	getUserData();
+		console.log(getUserData())
 	
 	},[logged,user])
 	const role = getUserData();
@@ -31,7 +31,7 @@ export default function Home() {
 
 	useEffect(()=>{
 		recibirDatos();
-	},[recibirDatos])
+	},[url])
 
 	const updateTableState = async (userId) => {
 
@@ -59,8 +59,7 @@ export default function Home() {
 						<div className=" gap-4   grid   grid-cols-2 sm:grid-cols-4 lg:gap-6 xl:gap-8">
 						{
 							table.map((tables,index)=>{
-
-							return<div key={index}><Table  tables={tables} updateTableState={updateTableState} /></div> 
+							return <Table key={index}  tables={tables} updateTableState={updateTableState} />
 							})
                   		}
 						</div>
