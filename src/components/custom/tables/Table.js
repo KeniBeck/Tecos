@@ -31,7 +31,7 @@ const Table = ({ tables, updateTableState }) => {
 
 
     const handleClick = async () => {
-        if (role !== 'cajero' && role !== 'admin') { 
+        
             await updateTableState(tables.id);
             addToCart({id_mesa: tables.id } )
             setClicked(true);
@@ -39,7 +39,7 @@ const Table = ({ tables, updateTableState }) => {
                 router.push(`/menu`);
             
             
-        }
+        
     };
 
    

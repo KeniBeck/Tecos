@@ -14,6 +14,7 @@ const Admin = () => {
     router.push('/cashier')
 
   }
+  console.log('estoy en admin',getUserData());
 
     return (
       <RouteProtected>

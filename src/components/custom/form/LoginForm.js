@@ -1,12 +1,14 @@
 'use client'
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useForm } from "react-hook-form"
+import { get, useForm } from "react-hook-form"
 import useSession from "@/hook/useSession";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () =>{
-    const {login} = useSession()
+    const {login,getUserData} = useSession()
+    const router = useRouter();
 
 
     const {
@@ -28,10 +30,12 @@ const LoginForm = () =>{
             },
             body: JSON.stringify(dataUser)   // Convierte el objeto "dataUser" a una cadena JSON y lo asigna como cuerpo de la solicitud.
         }
-         await fetch("/api/login",options)  // Realiza una solicitud HTTP POST a la ruta "/api/login" utilizando las opciones definidas.
-        .then(res=>res.json())    // Convierte la respuesta a formato JSON.
-        .then(data=>processData(data))   // Imprime los datos de la respuesta en la consola.
         
+         await fetch("/api/login",options)  // Realiza una solicitud HTTP POST a la ruta "/api/login" utilizando las opciones definidas.
+        .then(res=>res.json() )    // Convierte la respuesta a formato JSON.
+        .then(data=>processData(data) )   // Imprime los datos de la respuesta en la consola.
+        //console.log(getUserData())
+       
         //quiero exporta la data a todass mi page ?
     }
 
@@ -47,15 +51,20 @@ const LoginForm = () =>{
     }
 
     const processData = (data) =>{
+       
+        
         if (data.length == 1) {  
             login(data[0].rol)
+           
+            
             switch (data[0].rol) {
                 case 'admin':
-                    window.location.href = "/admin"
+                    router.push('/admin')
+                    
                     
                     break;
                 default:
-                    window.location.href = "/cashier"
+                    router.push('/cashier')
                     break;
             }
         } else {
@@ -63,6 +72,7 @@ const LoginForm = () =>{
         }
         
     }
+    
 
     return <form 
     onSubmit={handleSubmit(enviarDatos)}

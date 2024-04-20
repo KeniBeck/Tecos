@@ -10,6 +10,7 @@ const Pedidos = () => {
             const response = await fetch('/api/order');
             const data = await response.json();
             setOrder(data.result);
+            //console.log(data);
         };
 
         recibirDatos();
@@ -35,6 +36,7 @@ const Pedidos = () => {
             <p className="text-2xl text-neutral-100 italic font-semibold mb-2 text-center p-5">Liberar mesas</p>
             <div className="flex justify-center">
                 {mesasUnicas.map(mesaId => {
+                    
                     // Filtrar las órdenes para encontrar la primera orden asociada a esta mesa
                     const mesaOrder = order.find(item => item.mesa_id === mesaId);
                     return mesaOrder ? <LiberarMesa key={mesaOrder.id} liberar={mesaOrder} /> : null;
@@ -44,9 +46,13 @@ const Pedidos = () => {
                 {order.map((orders) => (
                     <CampoOrder key={orders.id} orders={orders} updateCampoOrder={updateCampoOrder} />
                 ))}
+                
             </div>
+            
         </div>
+        
     );
+    
 };
 
 export default Pedidos;

@@ -77,6 +77,8 @@ export const selectOrder = async () => {
         `;
         let [rows] = await pool.query(sql);
         result = rows;
+        
+        
     } catch (err) {
         error = {
             "sql": sql,

@@ -12,6 +12,7 @@ const Cashier = () => {
 
 
   const role = getUserData();
+  
   console.log(role)
  
  
