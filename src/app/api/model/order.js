@@ -10,6 +10,7 @@ export const insertOrder = async (data) => {
 
     try {
         const { productos, valor_total, estado, mesa_id, valor_pagado } = data;
+        const conexion = await pool.getConnection();
 
         // Primero, insertamos en la tabla pedido
         sql1 = `INSERT INTO pedido ( valor_total, fecha, hora, estado, mesa_id,valor_pagado)
@@ -19,7 +20,7 @@ export const insertOrder = async (data) => {
         await pool.query(sql1);
 
         resultPedidoId = 'SELECT LAST_INSERT_ID() as pedido_id';
-        pedidoId = await pool.query(resultPedidoId);
+        pedidoId = await conexion.query(resultPedidoId);
         pedidoId = pedidoId[0][0].pedido_id;
 
         productos.forEach(async (producto) => {
@@ -28,7 +29,7 @@ export const insertOrder = async (data) => {
                 VALUES
                 (${pedidoId}, ${id_producto}, ${cantidad_producto}, ${valor_unitario})`;
 
-            await pool.query(sql2);
+            await conexion.query(sql2);
 
         });
     } catch (err) {
@@ -50,7 +51,13 @@ export const insertOrder = async (data) => {
         pedidoId
     };
 
+    conexion.release();
     return response;
+
+
+
+
+
 };
 
 
