@@ -16,19 +16,19 @@ const Pedidos = () => {
     }, []);
 
     const updateCampoOrder = async (orderId) => {
-        const options = {   
-            method: 'PUT',  
-            headers: {  
-                'Content-Type': 'application/json'  
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ estado: 'entregado' })
         }
-        
-        await fetch(`/api/order/${orderId}`, options);  
-    };  
+
+        await fetch(`/api/order/${orderId}`, options);
+    };
 
     // Encontrar mesas únicas
-    const mesasUnicas = [...new Set(order.map(item => item.mesa_id))].sort((a, b) => a - b);
+    const mesasUnicas = [...new Set(order?.map(item => item.mesa_id))].sort((a, b) => a - b);
 
     return (
         <div>
@@ -41,7 +41,7 @@ const Pedidos = () => {
                 })}
             </div>
             <div className="grid grid-cols-3 gap-5 mx-7 my-4">
-                {order.map((orders) => (
+                {order?.map((orders) => (
                     <CampoOrder key={orders.id} orders={orders} updateCampoOrder={updateCampoOrder} />
                 ))}
             </div>

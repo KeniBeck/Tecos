@@ -1,21 +1,21 @@
 import pool from "@/db/MysqlConection";
 
-export const insertUser = async  (data) =>{
-    let result =true;
+export const insertUser = async (data) => {
+    let result = true;
     let error = false
     let sql = null;
     try {
-        const {cedula, nombre, apellido, correo, password, rol } = data; 
-        let sql = `INSERT INTO  usuarios (cedula, nombre, apellido, correo, password, rol) VALUES ('${cedula}', '${nombre}', '${apellido}', '${correo}','${password}', '${rol}'  )`;   
+        const { cedula, nombre, apellido, correo, password, rol } = data;
+        let sql = `INSERT INTO  usuarios (cedula, nombre, apellido, correo, contrasena, rol) VALUES ('${cedula}', '${nombre}', '${apellido}', '${correo}','${password}', '${rol}'  )`;
         await pool.query(sql);
-        
+
     } catch (err) {
-        result= false;
+        result = false;
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
         }
-        console.log(error)  
+        console.log(error)
     }
     let response = {
         "preocess": 'insert user',
@@ -25,20 +25,21 @@ export const insertUser = async  (data) =>{
     }
     return response
 }
-export const selectUser = async () =>{
-    let result =false;
+export const selectUser = async () => {
+    let result = false;
     let error = false
-   
-    try{
+    let sql = '';
+
+    try {
         let sql = 'SELECT  * FROM  usuarios'
         let [rows] = await pool.query(sql);
-        result =rows
-    }catch (err){
+        result = rows
+    } catch (err) {
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
         }
-        console.log(error)  
+        console.log(error)
     }
     let response = {
         "preocess": 'select user',
@@ -49,19 +50,20 @@ export const selectUser = async () =>{
     return response
 }
 
-export const selectUserId = async (cedula) =>{
-    let result =false;
+export const selectUserId = async (cedula) => {
+    let result = false;
     let error = false
-    try{
-        let sql = `SELECT * FROM usuarios WHERE  cedula  = '${cedula}'`
+    let sql = '';
+    try {
+        sql = `SELECT * FROM usuarios WHERE  cedula  = '${cedula}'`
         let [rows] = await pool.query(sql);
-        result =rows
-    }catch (err){
+        result = rows
+    } catch (err) {
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
         }
-        console.log(error)  
+        console.log(error)
     }
     let response = {
         "preocess": 'select user',
@@ -72,21 +74,22 @@ export const selectUserId = async (cedula) =>{
     return response
 }
 
-export const updateUser =  async (id,data) =>{
+export const updateUser = async (id, data) => {
     let status = false;
     let error = false;
     let updates = [];
-    for(const campo in data){
+    let sql = '';
+    for (const campo in data) {
         updates.push(`${campo} = '${data[campo]}'`)
     }
-    let sql = `UPDATE usuarios  SET   ${updates.join(', ')} WHERE cedula = ${id}  `; 
-    try {  
+    sql = `UPDATE usuarios  SET   ${updates.join(', ')} WHERE cedula = ${id}  `;
+    try {
         await pool.query(sql);
         status = true
     } catch (err) {
-        result= false;
+        result = false;
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
         }
     }
@@ -98,27 +101,27 @@ export const updateUser =  async (id,data) =>{
     return response
 }
 
-export const deleteUser = async (cedula) =>{
+export const deleteUser = async (cedula) => {
     console.log(cedula)
-    
-   let status = false;
+
+    let status = false;
     let error = false
     let sql = `DELETE FROM usuarios WHERE  cedula  = '${cedula}'`
-    try{
+    try {
         await pool.query(sql);
         status = true
-    }catch (err){
+    } catch (err) {
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
-        } 
+        }
     }
-    
+
     let response = {
         "preocess": 'delete user',
         "status": status,
         "error": error
     }
-    
+
     return response;
 }
