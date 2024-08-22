@@ -6,7 +6,7 @@ import path from 'path';
 export const insertProducts = async (data) => {
     let result = true;
     let error = null;
-    let sql = null;
+    let sql = '';
 
     try {
         const { nombre, descripcion, categoria, imagen, precio } = data;
@@ -16,7 +16,7 @@ export const insertProducts = async (data) => {
         const nombreImagen = `${timestamp}_${nombre}.jpeg`; // Cambia el nombre de la imagen según tus necesidades
         const rutaImagen = path.join(__dirname, `../../../../../public/img/menu/${nombreImagen}`);
         const imagenBuffer = Buffer.from(imagen.split(',')[1], 'base64'); // Decodificar la imagen desde base64
-        
+
 
         // Generar la URL de la imagen
         const urlImagen = `/img/menu/${nombreImagen}`;
@@ -45,20 +45,21 @@ export const insertProducts = async (data) => {
 
 
 
-export const selectProducts = async () =>{
-    let result =false;
+export const selectProducts = async () => {
+    let result = false;
     let error = false
-   
-    try{
-        let sql = 'SELECT  * FROM  productos'
+    let sql = '';
+
+    try {
+        sql = 'SELECT  * FROM  productos'
         let [rows] = await pool.query(sql);
-        result =rows
-    }catch (err){
+        result = rows
+    } catch (err) {
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
         }
-        console.log(error)  
+        console.log(error)
     }
     let response = {
         "preocess": 'select products',
@@ -69,19 +70,20 @@ export const selectProducts = async () =>{
     return response
 }
 
-export const selectProductsId = async (id) =>{
-    let result =false;
-    let error = false
-    try{
-        let sql = `SELECT * FROM productos WHERE  id  = '${id}'`
+export const selectProductsId = async (id) => {
+    let result = false;
+    let error = false;
+    let sql = '';
+    try {
+        sql = `SELECT * FROM productos WHERE  id  = '${id}'`
         let [rows] = await pool.query(sql);
-        result =rows
-    }catch (err){
+        result = rows
+    } catch (err) {
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
         }
-        console.log(error)  
+        console.log(error)
     }
     let response = {
         "preocess": 'select products',
@@ -92,19 +94,20 @@ export const selectProductsId = async (id) =>{
     return response
 }
 
-export const selectProductsCategory = async (categoria) =>{
-    let result =false;
+export const selectProductsCategory = async (categoria) => {
+    let result = false;
     let error = false
-    try{
-        let sql = `SELECT * FROM productos WHERE  categoria  = '${categoria}'`
+    let sql = '';
+    try {
+        sql = `SELECT * FROM productos WHERE  categoria  = '${categoria}'`
         let [rows] = await pool.query(sql);
-        result =rows
-    }catch (err){
+        result = rows
+    } catch (err) {
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
         }
-        console.log(error)  
+        console.log(error)
     }
     let response = {
         "preocess": 'select products',
@@ -116,26 +119,27 @@ export const selectProductsCategory = async (categoria) =>{
 }
 
 
-export const updateProducts =  async (id,data) =>{
+export const updateProducts = async (id, data) => {
     let status = false;
     let error = false;
     let updates = [];
-    for(const campo in data){
+    let sql = '';
+    for (const campo in data) {
         updates.push(`${campo} = '${data[campo]}'`)
     }
-    let sql = `UPDATE productos SET ${updates.join(', ')} WHERE id = ${id}  `; 
- 
-    try {  
+    sql = `UPDATE productos SET ${updates.join(', ')} WHERE id = ${id}  `;
+
+    try {
         await pool.query(sql);
         status = true
     } catch (err) {
-        result= false;
+        result = false;
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
         }
     }
-    
+
     let response = {
         "preocess": 'update products',
         "status": status,
@@ -144,29 +148,29 @@ export const updateProducts =  async (id,data) =>{
     return response
 }
 
-export const deleteProducts = async (id) =>{
+export const deleteProducts = async (id) => {
     console.log(id)
-    
+
     let status = false;
     let error = false
     let sql = `DELETE FROM productos WHERE  id  = '${id}'`
-    try{
-        
+    try {
+
         await pool.query(sql);
         status = true
-    }catch (err){
+    } catch (err) {
         error = {
-            "sql" : sql,
+            "sql": sql,
             "description": err
-        } 
+        }
     }
-    
+
     let response = {
         "preocess": 'delete products',
         "status": status,
         "error": error
     }
-    
+
     return response;
 }
 
